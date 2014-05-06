@@ -1,0 +1,21 @@
+Django==1.6.3
+
+# Heroku reqs
+dj-database-url==0.2.2
+dj-static==0.0.5
+gunicorn==18.0
+psycopg2==2.5.1
+static==0.4
+wsgiref==0.1.2
+
+# base deps
+iso8601==0.1.4
+pytz==2013b
+simplejson==2.5.2
+django-slimmer==0.0.2
+Jinja2==2.6
+lxml==3.2.1
+
+# adn
+adnpy==0.3.8
+git+https://github.com/berg/python-social-auth.git

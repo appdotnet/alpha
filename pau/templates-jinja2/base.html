@@ -1,0 +1,75 @@
+<!doctype html>
+<html class="no-js {{ html_classes }} breakpoint-phone">
+{% import "pau/common/macros.html" as pau_macros with context %}
+    <head>
+        <meta charset="utf-8">
+        <title>{{ page_title }}</title>
+        <link rel="icon" type="image/x-icon" href="{{ get_asset_url('img', '/pau-static/images/favicon.ico') }}" />
+        <link rel="apple-touch-icon-precomposed" href="{{ get_asset_url('img', '/pau-static/images/apple-touch-icon.png') }}" />
+        <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
+        <meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <!-- Mobile IE allows us to activate ClearType technology for smoothing fonts for easy reading -->
+        <meta http-equiv="cleartype" content="on">
+        {% if page_description %}
+            <meta name="description" content="{{ page_description }}" />
+        {% endif %}
+        {% if page_keywords %}
+            <meta name="keywords" content="{{ page_keywords }}" />
+        {% endif %}
+
+        <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <link href='//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+        {% block extra_header %}
+        {% endblock %}
+
+        {% block extra_css %}
+            <link rel="stylesheet" href="/pau-static/build_output/css/pau.css">
+            <meta name="referrer" content="always">
+            <script>
+            {# This is for emoticons #}
+            /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
+            window.grunticon=function(e){if(e&&3===e.length){var t=window,n=!(!t.document.createElementNS||!t.document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||window.opera&&-1===navigator.userAgent.indexOf("Chrome")),o=function(o){var r=t.document.createElement("link"),a=t.document.getElementsByTagName("script")[0];r.rel="stylesheet",r.href=e[o&&n?0:o?1:2],a.parentNode.insertBefore(r,a)},r=new t.Image;r.onerror=function(){o(!1)},r.onload=function(){o(1===r.width&&1===r.height)},r.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="}};
+            grunticon(["//d39zheejy3ckol.cloudfront.net/emoji/423105160813/icons/icons.data.svg.css", "//d39zheejy3ckol.cloudfront.net/emoji/423105160813/icons/icons.data.png.css", "//d39zheejy3ckol.cloudfront.net/emoji/423105160813/icons/icons.fallback.css"]);
+            </script>
+            <noscript><link href="icons.fallback.css" rel="stylesheet"></noscript>
+        {% endblock %}
+    </head>
+
+    <body class='{% block body_class %}{% endblock %}'>
+        {% block body %}
+            <div id='pjax-container'>
+                {{ pau_macros.page_context_meta_tag() }}
+                {% block nav %}
+                    {% include "pau/common/nav.html" %}
+                {% endblock %}
+                {% block hero_block %}{% endblock %}
+                {% block main %}{% endblock %}
+                {% block footer %}
+                    {% include "pau/common/footer.html" %}
+                {% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block pre_javascript %}{% endblock %}
+
+        {% block javascript %}
+            {%- if DEBUG -%}
+                <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+            {%- else -%}
+                <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            {%- endif -%}
+            <script src="/pau-static/build_output/js/pau.js" type="text/javascript" ></script>
+        {% endblock %}
+
+        {% block post_javascript %}
+            {# This is for emoticons #}
+            <script type="text/javascript" src='//d39zheejy3ckol.cloudfront.net/emoji/423105160813/emoji_replace.min.js'></script>
+        {% endblock %}
+
+        {% block analytics %}
+        {% endblock %}
+
+    </body>
+</html>

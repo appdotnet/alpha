@@ -1,0 +1,7 @@
+https://github.com/twitter/bootstrap
+gitosis@git.int.sfo01.mml:thirdparty/bootstrap.git
+b261f9781bbf31f499cb55c49451dc0c0ad43062
+
+NB: this one file - bootstrap-typeahead.js - was dragged in by mstorus from:
+c52368d3c5984b28e6a71e5e1240afdd788fc2e6
+we should upgrade all of bootstrap eventually

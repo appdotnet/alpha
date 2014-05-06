@@ -1,0 +1,61 @@
+//
+// # Media Blocks
+//
+// A Media Block is used when you need a fixed width div, mixed with a flexible div.
+//
+// For example, a 57px width box for a profile image and content box that will
+// take up 100% of the remaining content.
+//
+// visual layout
+// +------------------------- media block -------------------------+
+// |+-------- media -----++------------- content -----------------+|
+// ||                    ||                                       ||
+// ||                    ||                                       ||
+// ||                    ||                                       ||
+// |<- $left_col_width -> |
+//
+// HTML layout
+// <div class='post-container'> // could be other containers that use @media-block, eg. .user-container
+//     <div class='content'>
+//
+//         * put the .media element first, as a convention
+//         <div class='media'>
+//             <img src=".../profile_img.png">
+//         </div>
+//
+//         <p>Some awesome content, eg. a status update</p>
+//     </div>
+//
+// </div>
+
+@mixin media-block($left_col_width, $left: 0, $top: 0) {
+
+    position: relative;
+
+    & > .content {
+        margin-left: $left_col_width;
+
+        & > .media {
+            position: absolute;
+            left: $left;
+            top: $top;
+        }
+    }
+
+}
+
+@mixin reversed-media-block($right_col_width, $right: 0, $top: 0) {
+
+    position: relative;
+
+    .content {
+        margin-right: $right_col_width;
+
+        .media {
+            position: absolute;
+            right: $right;
+            top: $top;
+        }
+    }
+
+}

@@ -1,0 +1,10 @@
+@mixin textarea() {
+    height: 80px;
+    resize: none;
+    overflow: hidden;
+    margin: 0;
+    padding: 10px 10px;
+
+    // for autogrow to transition nicely
+    @include transition(#{border-color .2s linear, height 50ms ease-in});
+}

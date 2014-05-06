@@ -1,0 +1,43 @@
+// WELLS
+// -----
+
+.well-plain {
+  min-height: 20px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.well-style {
+  background-color: $white;
+  border: 1px solid $grayLighter;
+
+  blockquote {
+    border-color: $grayLighter;
+  }
+}
+
+.well {
+    @extend .well-plain;
+    @extend .well-style;
+}
+
+
+.well-elevated {
+    @extend .well-style;
+    @include box-shadow(0 2px 0 rgba(0, 0, 0, 0.05));
+}
+
+// Sizes
+.well-large {
+  padding: 24px;
+  @include border-radius(6px);
+}
+.well-small {
+  padding: 9px;
+  @include border-radius(3px);
+}
+
+.well-sides-only {
+  @extend .well;
+  padding: 0 19px;
+}

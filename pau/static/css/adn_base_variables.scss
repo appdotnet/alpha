@@ -1,0 +1,237 @@
+
+// Grays
+// -------------------------
+$black:                 #000 !default;
+$grayDarker:            #222 !default;
+$grayDark:              #333 !default;
+$gray:                  #555 !default;
+$grayLight:             #999 !default;
+$grayLighter:           #ddd !default;
+$grayLightest:          #eee !default;
+$white:                 #fff !default;
+
+
+// Accent colors
+// -------------------------
+$blue:                  #6fa3cb;
+$blueDark:              #212a31;
+$blueMediumDark:        #394f60;
+$blueLight:             #daecf7;
+$blueLightAlt:          #bad7ed;
+$green:                 #90cb6f;
+$red:                   #d44646;
+$yellow:                #cbc36f;
+$yellowLight:           #ffd;
+$orange:                #f89406 !default;
+$pink:                  #bc7676;
+$purple:                #8071b6;
+$purpleDark:            #1e0c29;
+$adn_base_green:        #90cb6f !default;
+$bitcoinBlue:           #5371c5;
+
+// Thematic Colors
+// -------------------------
+$themeAttention:        #d36854;
+$themeAccent:           #4a484c;
+$themeSolid:            #ededed;
+$themeText:             $themeAccent;
+$themeSubText:          #898d90;
+$themeWarning:          $red;
+
+// Variables
+// Variables to customize the look and feel of Bootstrap
+// -----------------------------------------------------
+
+
+
+// GLOBAL VALUES
+// --------------------------------------------------
+
+
+// Scaffolding
+// -------------------------
+$bodyBackground:        #f9f9f9;
+$textColor:             $themeText;
+
+// Links
+// -------------------------
+$linkColor:             lighten($themeAttention, 5%);
+$linkColorHover:        darken($themeAttention, 5%);
+
+
+// Typography
+// -------------------------
+$sansFontFamily:        'Montserrat', Helvetica, Arial, sans-serif !default;
+$serifFontFamily:       Georgia, "Times New Roman", Times, serif !default;
+$monoFontFamily:        Menlo, Monaco, Consolas, "Courier New", monospace !default;
+
+$baseFontSize:          16px !default;
+$baseFontFamily:        $serifFontFamily !default;
+$baseLineHeight:        22px !default;
+$altFontFamily:         $sansFontFamily !default;
+
+$headingsFontFamily:    'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif !default; // empty to use BS default, $baseFontFamily
+$headingsFontWeight:    400;    // instead of browser default, bold
+$headingsColor:         lighten($themeAccent, 15%); // empty to use BS default, $textColor
+
+
+// Tables
+// -------------------------
+$tableBackground:                   transparent !default; // overall background-color
+$tableBackgroundAccent:             darken(#f9f9f9, 5%) !default; // for striping
+$tableBackgroundHover:              #f5f5f5 !default; // for hover
+$tableBorder:                       #ddd !default; // table and cell border
+
+
+// Buttons
+// -------------------------
+$btnBackground:                     $grayLighter;
+$btnBackgroundHighlight:            darken($grayLighter, 11%);
+$btnBorder:                         #1b1b1c;
+
+$btnPrimaryBackground:              $linkColor !default;
+$btnPrimaryBackgroundHighlight:     darken($btnPrimaryBackground, 4%);
+
+$btnInfoBackground:                 #5bc0de !default;
+$btnInfoBackgroundHighlight:        #2f96b4 !default;
+
+$btnSuccessBackground:              $green;
+$btnSuccessBackgroundHighlight:     #51a351 !default;
+
+$btnWarningBackground:              lighten($orange, 15%) !default;
+$btnWarningBackgroundHighlight:     $orange !default;
+
+$btnDangerBackground:               $red;
+$btnDangerBackgroundHighlight:      #bd362f !default;
+
+$btnInverseBackground:              $gray !default;
+$btnInverseBackgroundHighlight:     $grayDarker !default;
+
+
+// Forms
+// -------------------------
+$inputBackground:               $white !default;
+$inputBorder:                   #ccc !default;
+$inputBorderRadius:             3px !default;
+$inputDisabledBackground:       $grayLighter !default;
+$formActionsBackground:         #f5f5f5 !default;
+
+// Dropdowns
+// -------------------------
+$dropdownBackground:            $white !default;
+$dropdownBorder:                rgba(0, 0, 0, .2) !default;
+$dropdownLinkColor:             $grayDark !default;
+$dropdownLinkColorHover:        $white !default;
+$dropdownLinkBackgroundHover:   $linkColor !default;
+
+
+
+// COMPONENT VARIABLES
+// --------------------------------------------------
+
+// Z-index master list
+// -------------------------
+// Used for a bird's eye view of components dependent on the z-axis
+// Try to avoid customizing these :)
+$zindexDropdown:          1000 !default;
+$zindexPopover:           1010 !default;
+$zindexTooltip:           1020 !default;
+$zindexFixedNavbar:       1030 !default;
+$zindexModalBackdrop:     1040 !default;
+$zindexModal:             1050 !default;
+
+
+// Sprite icons path
+// -------------------------
+$iconSpritePath:          url('/static/palama/images/glyphicons-halflings.png');
+$iconWhiteSpritePath:     url('/static/palama/images/glyphicons-halflings-white.png');
+$loadingImage:            url('/static/palama/images/loader.gif');
+
+// Input placeholder text color
+// -------------------------
+$placeholderText:         $grayLight !default;
+
+
+// Hr border color
+// -------------------------
+$hrBorder:                $grayLighter !default;
+
+
+// Navbar
+// -------------------------
+$navbarHeight:                    40px !default;
+$navbarBackground:                $grayDarker !default;
+$navbarBackgroundHighlight:       $grayDark !default;
+
+$navbarText:                      $white;
+$navbarLinkColor:                 $white;
+$navbarLinkColorHover:            transparentize($white, .2);
+$navbarLinkColorActive:           $navbarLinkColorHover;
+$navbarLinkBackgroundHover:       transparent;
+$navbarLinkBackgroundActive:      $navbarBackground;
+$navbarBrandColor:                $white;
+
+$navbarSearchBackground:          lighten($navbarBackground, 25%) !default;
+$navbarSearchBackgroundFocus:     $white !default;
+$navbarSearchBorder:              darken($navbarSearchBackground, 30%) !default;
+$navbarSearchPlaceholderColor:    #ccc !default;
+$navbarBrandColor:                $white;
+
+
+// Hero unit
+// -------------------------
+$heroUnitBackground:              $grayLighter !default;
+$heroUnitHeadingColor:            inherit !default;
+$heroUnitLeadColor:               inherit !default;
+
+
+// Form states and alerts
+// -------------------------
+$warningText:             #c09853 !default;
+$warningBackground:       #fcf8e3 !default;
+$warningBorder:           darken(adjust-hue($warningBackground, -10), 3%) !default;
+
+$errorText:               $red;
+$errorBackground:         #f2dede !default;
+$errorBorder:             darken(adjust-hue($errorBackground, -10), 3%) !default;
+
+$successText:             #468847 !default;
+$successBackground:       #dff0d8 !default;
+$successBorder:           darken(adjust-hue($successBackground, -10), 5%) !default;
+
+$infoText:                $red;
+$infoBackground:          #d9edf7 !default;
+$infoBorder:              darken(adjust-hue($infoBackground, -10), 7%) !default;
+
+
+
+// GRID
+// --------------------------------------------------
+
+// Default 940px grid
+// -------------------------
+$gridColumns:             12 !default;
+$gridColumnWidth:         60px !default;
+$gridGutterWidth:         20px !default;
+$gridRowWidth:            ($gridColumns * $gridColumnWidth) + ($gridGutterWidth * ($gridColumns - 1)) !default;
+
+// Fluid grid
+// -------------------------
+$fluidGridColumnWidth:    6.382978723% !default;
+$fluidGridGutterWidth:    2.127659574% !default;
+
+
+$btnRadiusDefault:      54px;
+
+$fontStack:             $sansFontFamily;
+$containerWidth:        1152px;
+$formwidth:             100%;
+$leftFormSpace:         155px;
+
+$btnBlueBackground:                 lighten($themeAttention, 15%);
+$btnBlueBackgroundHighlight:        $themeAttention;
+
+$miniContainerWidth: 480px;
+
+$pauBaseFontFamily:        "Helvetica Neue", Helvetica, Arial, sans-serif;
+

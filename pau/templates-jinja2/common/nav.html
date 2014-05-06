@@ -1,0 +1,33 @@
+<div id='replace-header'>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/"></a>
+                <div class="pull-right">
+                    <ul class="nav">
+                        {% if request.user.is_authenticated() %}
+                        <li class="dropdown header-box">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                {{ request.user.username }}
+                                <i class='icon-chevron-down'></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ url_for('user_detail_view', args=[request.user.username]) }}">Profile</a>
+                                </li>
+                                <li>
+                                    <a href="{{ url_for('logout') }}">Log out</a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="{{ url_for('login', url_params={'next': request.build_absolute_uri() }) }}">Log in</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

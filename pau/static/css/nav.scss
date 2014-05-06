@@ -1,0 +1,118 @@
+.alpha-nav {
+    html.ie.v9_0 & {
+        background-image: none;
+        filter: none;
+    }
+
+    .nav {
+        display: block;
+        width: 100%;
+
+        li a {
+            line-height: 20px;
+
+            i {
+                line-height: normal;
+            }
+        }
+    }
+
+    .dropdown .icon-only {
+        display: none;
+    }
+
+    html.breakpoint-phone & {
+
+        .branding {
+            display: block;
+            width: 30px;
+        }
+
+        .dropdown .icon-only {
+            display: inline-block;
+        }
+
+        .dropdown .username {
+            display: none;
+        }
+    }
+}
+
+.navbar-inner .nav .dropdown-menu {
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, .95);
+    border: 0;
+
+    &::after {
+        border-bottom: 6px solid rgba(255, 255, 255, .95);
+    }
+
+    li {
+
+        &.first {
+            margin-top: 5px;
+            padding-top: 3px;
+            border-top: 1px solid darken($themeAccent, 10%);
+        }
+
+        a {
+            font-size: 13px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            @include box-shadow(none);
+
+            html.breakpoint-phone & {
+                font-size: 11px;
+                padding-top: 1px;
+                padding-bottom: 1px;
+            }
+        }
+    }
+
+    li.secondary-links {
+        display: none;
+
+        html.breakpoint-phone & {
+            display: block;
+        }
+    }
+}
+
+.navbar {
+    margin: 0 auto 0 auto;
+
+    .navbar-inner {
+        position: relative;
+        padding: 0;
+        @include box-shadow(none);
+        background: none;
+        filter: none;
+
+        .nav {
+
+            margin: 0;
+        }
+
+        .brand,
+        .nav > li > a {
+            padding-top: 11px;
+            font-weight: bold;
+        }
+
+        .hide-textindent {
+            width: 0;
+            height: 0;
+        }
+    }
+}
+
+.navbar {
+
+    .nav li {
+
+        a.brand,
+        &.about-dropdown-menu a {
+            @include box-shadow(none);
+        }
+    }
+}

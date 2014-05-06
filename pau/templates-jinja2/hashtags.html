@@ -1,0 +1,15 @@
+{% extends 'pau/stream.html' %}
+
+{% block hero %}
+<div class="hero-unit">
+    <div class="yui3-g">
+        <div class="yui3-u-4-5">
+            <div class="colored-circle alpha-heading-icon"><p>#</p></div>
+            <div class="alpha-heading">{{hashtag}}</div>
+        </div>
+        <div class="yui3-u-1-5 ta-right">
+            <a href='{{ rss_link}}' class='muted rss-link info-right' target='_blank'><i class='icon-rss transition-color'></i> RSS</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

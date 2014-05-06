@@ -1,0 +1,23 @@
+{% extends 'pau/base.html' %}
+
+{% block nav %}{% endblock %}
+{% block hero_block %}
+<div class="wide-container top-block blue backer-top-block alpha-top-block">
+    <div class="container">
+        <div class="main-content-block ta-center">
+            <div class="alpha-index-logo"></div>
+            <h1 class="heading-with-hr"><span>There was an error</span><hr></h1>
+            <p class="note-style">{{ error_description }}</p>
+            <div class="simple-sign-up-block">
+                <a href='{{ url_for('login') }}' class='btn btn-primary broadcast-index-button'>Try Logging In Again</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

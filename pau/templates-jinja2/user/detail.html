@@ -1,0 +1,137 @@
+{% extends 'pau/stream.html' %}
+
+{% macro stats_details() %}
+<div class='yui3-u-1'>
+    <div class='stars-from yui3-u-1 va-middle'>
+        <a href='{{ url_for("stars_from_user", args=[username]) }}'><strong class="transition-color">{{num_starred|intcomma}}</strong><span class='text'> Starred</span></a>
+    </div>
+    <hr>
+    <div class='follow-from yui3-u-1 va-middle'>
+        <a href='{{ url_for("follows_from", args=[username]) }}'><strong class="transition-color" data-follow-from-count='{{num_following}}'>{{num_following|intcomma}}</strong><span class='text'> Following</a>
+    </div>
+    <hr>
+    <div class='follow-to yui3-u-1 va-middle'>
+        <a href='{{ url_for("follows_to", args=[username]) }}'><strong class="transition-color" data-follow-to-count='{{num_followers}}'>{{num_followers|intcomma}}</strong><span class='text'> Follower{{'s' if num_followers != 1}}</a>
+    </div>
+    <hr>
+    <div class='yui3-u-1 user-btn-block'>
+    {% if request.user.is_authenticated() %}
+        {% if owner.id != request.user.adn_user.id %}
+        {% set blocked = owner.you_blocked %}
+        {% set muted = owner.you_muted %}
+        <div data-mute-help class="mute-help {{"muted" if muted else ""}}">
+            <span class="text-muted">You muted {{username}}.</span>
+        </div>
+        <div data-block-help class="block-help {{"blocked" if blocked else ""}} mg-b-10">
+            <span class="text-blocked">You blocked {{username}}.</span>
+        </div>
+        <div class="user-preferences-dropdown-block">
+            <a href="#" class="user-preferences-dropdown dropdown-toggle transition-color btn btn-small" role="menu" data-toggle="dropdown">
+                <i class="icon-cog"></i>&nbsp;&nbsp;<i class="icon-chevron-down"></i>
+            </a>
+            <ul class="dropdown-menu unstyled">
+                <li>
+                    <a href="#" class="mute-btn {{" muted" if muted else ""}}" data-mute-user data-mute-status="{{1 if muted else 0}}" data-username="{{username}}" data-user-id="{{owner.id}}">
+                        <span class="text-mute">Mute</span>
+                        <span class="text-unmute">Unmute</span>
+                        <span class="username m-yui3-u-none"> @{{username}}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="ta-left transition-color block-btn{{" blocked" if blocked else ""}}" data-block-user data-block-status="{{1 if blocked else 0}}" data-username="{{username}}" data-user-id="{{owner.id}}">
+                        <span class="text-block">Block</span>
+                        <span class="text-unblock">Unblock</span>
+                        <span class="username m-yui3-u-none"> @{{username}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
+    {% endif %}
+    {{ follow_btn|render_presenters }}
+    </div>
+</div>
+{% endmacro %}
+
+{% macro verification() %}
+<a class="yui3-u u-url verified pointer" href="{{verified_domain_link}}" rel="me nofollow" target="_blank">
+    <i class="icon-ok-sign"></i>
+    <span class='text'> {{verified_domain}}</span>
+</a>
+{% endmacro %}
+
+{% block before_main_content %}
+    <div class="user-profile h-card" {% if username == "rrk" %}itemscope itemtype="http://schema.org/Person"{% endif %}>
+        {# h-card #}
+        <data class="u-photo" value="{{ avatar_image['80s'] }}"></data>
+        <div class="well cover" style="background-image: url({{cover_image['862r']}});"></div>
+        <div class='well user-profile-bottom'>
+            <div class="user-container">
+                <div class="content">
+                    <div class="media">
+                        <a href="{{url_for('user_detail_view', args=[username])}}" class="avatar large" style="background-image: url({{avatar_image['80s']}});"></a>
+                    </div>
+                    <div class='yui3-g'>
+                        {% block cover_bottom_content %}
+                        <div class="yui3-u-1">
+                            <h1>
+                                <a href="{{url_for('user_detail_view', args=[username])}}" class='username p-nickname' title="User Id {{owner.id}}">{{ username }}</a><small class='p-name'>{{ owner_name }}</small>
+                            </h1>
+                            {% if verified_domain %}{{verification()}}{% endif %}
+                        </div>
+                        <div class="yui3-u-2-3 t-yui3-u-3-5 m-yui3-u-1">
+                            <div class="user-description subpixel">
+                                <span class='user-description-text'>{{ owner_description|render_presenters }}</span>
+                            </div>
+                        </div>
+                        <div class='yui3-u-1-3 t-yui3-u-2-5 m-yui3-u-1 follow-details ta-center subpixel' data-follow-details>
+                        {{ stats_details() }}
+                        </div>
+                        {% endblock %}
+                    </div>
+                    <ul class="rss-link-container unstyled subpixel">
+                        <li><a href='{{ rss_link}}' class='muted rss-link yui3-u' target='_blank'><i class='icon-rss transition-color'></i>RSS</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block after_main_content %}
+{% if related_broadcast_channels %}
+    <div class='hide'>
+        <div data-promote-related-broadcasts-title>
+            <div class="related-broadcasts-modal-header ta-center">
+                <h4>You might also like to receive Broadcasts from {{ username }}</h4>
+                <button type="button" class="close" data-dismiss="modal"><i class='icon-remove'></i></button>
+            </div>
+        </div>
+        <div data-promote-related-broadcasts-html data-related-broadcasts-user-id="{{ related_broadcasts_user_id }}">
+            <div class='related-broadcasts-body'>
+                <div class='related-broadcasts-body-inner'>
+                        {% if ever_authorized_app %}
+                            Since you already have the mobile app, you're all set to receive Broadcasts on your phone.
+                            {% if related_broadcast_channels|length == 1 %}
+                                Subscribe to the Broadcast channel below:
+                            {% else %}
+                                Subscribe to a Broadcast channel below:
+                            {% endif %}
+                        {% else %}
+                            By subscribing to a Broadcast channel and downloading the app, you'll get push notifications on your phone when something important happens.
+                        {% endif %}
+                </div>
+                <ul class='unstyled' data-promote-related-broadcasts-channels-list>
+                    {{ related_broadcast_channels|render_presenters}}
+                </ul>
+            </div>
+        </div>
+        <div
+            {% if not ever_authorized_app %}
+                data-promote-related-broadcasts-show-download-button=1
+                data-promote-related-broadcasts-download-url='{{ download_appnet_url }}'
+            {% endif %}
+        ></div>
+    </div>
+{% endif %}
+{% endblock %}

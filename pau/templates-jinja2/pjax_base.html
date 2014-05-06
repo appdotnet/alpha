@@ -1,0 +1,12 @@
+{% import "pau/common/macros.html" as pau_macros with context %}
+{% block nav %}
+    {% include "pau/common/nav.html" %}
+{% endblock %}
+{% block main %}{% endblock %}
+{% block footer %}
+    {% include "pau/common/footer.html" %}
+    {% if is_pjax %}
+    {{ pau_macros.page_context_meta_tag() }}
+    <title class='hide'>{{ page_title }}</title>
+    {% endif %}
+{% endblock %}

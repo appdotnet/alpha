@@ -1,0 +1,14 @@
+{% extends 'pau/pjax_switch.html' %}
+{% block nav_list %}{% endblock %}
+{% block main %}
+<div class='container yui3-g ta-center'>
+    <div class='yui3-u-1 t-yui3-u-11-12 m-yui3-u-11-12'>
+        <div class='yui3-u-1 ta-left'>
+            <h3>Post to App.net {% if post_create_url_message %}<small class='float-right m-yui3-u-1'>{{ post_create_url_message }}</small>{% endif %}</h3>
+        </div>
+        <div class='yui3-u-1'>
+            {{ post_box_presenter|render_presenters }}
+        </div>
+    </div>
+</div>
+{% endblock %}

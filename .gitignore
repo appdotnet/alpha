@@ -1,0 +1,8 @@
+.env
+venv
+*.pyc
+staticfiles
+pau/.sass-cache/
+pau/node_modules
+alpha/local_settings.py
+*.DS_Store

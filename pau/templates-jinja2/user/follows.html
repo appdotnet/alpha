@@ -1,0 +1,26 @@
+{% extends 'pau/stream.html' %}
+
+{% block hero %}
+    <div class="hero-unit collapse-right">
+        <div class="yui3-g">
+            {% set user_detail_url = url_for('user_detail_view', args=[owner.username]) %}
+            {% if follow_type == 'follows_to' %}
+                <div class="yui3-u-3-5 m-yui3-u-1">
+                    <div class="colored-circle alpha-heading-icon"><i class="icon-group"></i></div>
+                    <div class="alpha-heading">Followers</div>
+                </div>
+                <div class="yui3-u-2-5 m-yui3-u-1 ta-right">
+                    <p class="info-right muted"><a href="{{user_detail_url}}">@{{owner.username|possessive}}</a> followers</p>
+                </div>
+            {% elif follow_type == 'follows_from' %}
+                <div class="yui3-u-3-5 m-yui3-u-1">
+                    <div class="colored-circle alpha-heading-icon"><i class="icon-group"></i></div>
+                    <div class="alpha-heading">Following</div>
+                </div>
+                <div class="yui3-u-2-5 m-yui3-u-1 ta-right">
+                    <p class="info-right muted">Users <a href="{{user_detail_url}}">@{{owner.username}}</a> is following</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

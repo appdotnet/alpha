@@ -1,0 +1,13 @@
+{% import "pau/macros/forms.html" as forms with context %}
+
+{% macro reportpost() %}
+<div data-report-post-form class="hide">
+    <form method="POST" class='form-vertical form-flexible report-post-form'>
+        {{ forms.input_field(report_post_form['report_post_data']) }}
+    </form>
+</div>
+{% endmacro %}
+
+{% macro page_context_meta_tag() %}
+<meta name='adn-page-context' id='adn-page-context' data-adn-page-context='{{page_context}}' />
+{% endmacro %}

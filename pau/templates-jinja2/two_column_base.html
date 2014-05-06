@@ -1,0 +1,87 @@
+{% extends 'pau/pjax_switch.html' %}
+
+{% macro nav_menu_item(key, class, display_name, href, extra_nav_classes='', badge=0) %}
+    <li class="{% if selected_nav_page == key %}active{% endif %} {{ extra_nav_classes }} {{ key }}">
+        <a href="{{href}}">
+            {% if class %}
+            <i class="icon-{{ class }}"></i>
+            {% endif %}
+            <span class='hide-textindent'>{{display_name}}</span>
+            {% if badge %}
+            <span class="badge badge-important pull-right">{{ badge }}</span>
+            {% endif %}
+            <i class="icon-chevron-right m-yui3-u-hide"></i>
+        </a>
+    </li>
+{% endmacro %}
+
+{% macro search_bar(query) %}
+<form method="GET" action="{{url_for('search')}}" data-search-bar-form>
+    <div class='input-append search-bar'>
+        <input class='search-bar-input' type="text" name="query"
+            placeholder="Search" {% if query %}value="{{query}}"{% endif %}><button
+        class="search-icon-button" type='submit'>
+            <i class='icon-search'></i>
+        </button>
+    </div>
+</form>
+{% endmacro %}
+
+{% block main %}
+{% block hero_block %}
+{% endblock %}
+<div class='container main-container-alpha {% if not infinite_scroll %}min-height-container{% endif %} {% if not request.user.is_authenticated() %}user-unauthenticated{% endif %}'>
+    <div class='yui3-g {% block main_classes %}{% endblock %}'>
+        <div class='yui3-u-1-4 m-yui3-u-1'>
+            {% block sidebar %}
+            <div class='sidebar'>
+                <div class='dropdown'>
+                    <a class="dropdown-toggle nav-header yui3-u-none t-yui3-u-none m-yui3-u-1" id="dLabel" role="button" data-toggle="dropdown" href='#'></a>
+                    <div class='sidebar-fixed-part' data-fixed-offset="{% if request.user.is_authenticated() %}20{% else %}155{% endif %}">
+                        <div class='fixed-part-inside'>
+                            {% if request.user.is_authenticated() %}
+                            <ul class="nav nav-list m-yui3-u-none nav-vertically-responsive">
+                                <li class='nav-header'>Alpha</li>
+                                {{ nav_menu_item('stream', 'home', 'Your Stream', url_for('home')) }}
+                                {{ nav_menu_item('mentions', 'hand-right', 'Mentions', url_for('mentions')) }}
+                                {{ nav_menu_item('interactions', 'exchange', 'Interactions', url_for('interactions')) }}
+                                {{ nav_menu_item('stars', 'star', 'Stars', url_for("stars_from_user", args=[request.user.username])) }}
+                            </ul>
+                            <ul class='nav nav-list m-yui3-u-none nav-vertically-responsive'>
+                                <li class='nav-header'>Explore</li>
+                                {% for stream in explore_streams %}
+                                    <li {% if stream.slug == current_slug %}class="active"{% endif %}><a href="{{ stream.url}}">
+                                        {{ stream.title }} <i class="icon-chevron-right m-yui3-u-hide"></i></a></li>
+                                {% endfor %}
+                                {{ nav_menu_item('global', '', 'Global', url_for('global')) }}
+                            </ul>
+                            {% endif %}
+                            <div>
+                                <ul class="nav nav-list help-menu m-yui3-u-none nav-vertically-responsive">
+                                    <li class='nav-header'>
+                                        <span>Help</span>
+                                    </li>
+                                    <li><a href='http://support.app.net/customer/portal/articles/761034-what-is-alpha-'>What is Alpha?</a></li>
+                                    <li><a href="http://support.app.net" target="_blank">FAQ</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
+        {# XXX: Fucking horrible, I know, but this is the simplest least affecting change I could think of. #}
+        </div><div class='yui3-u-3-4 m-yui3-u-1 main-content-container'>
+            <div class="main-content-container-inner">
+                {% block hero %}
+                {% endblock %}
+                {% block before_main_content %}{% endblock %}
+                <div class='main-column'>
+                    {% block main_column %}{% endblock %}
+                </div>
+                {% block after_main_content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+// UTILITY CLASSES
+// ---------------
+
+.clearfix {
+  @include clearfix();
+}
+
+.hide-text {
+  @include hide-text();
+}
+
+.input-block-level {
+  @include input-block-level();
+}
+
+// Quick floats
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+
+// Toggling content
+.hide, html.no-js .no-js-hide, html.js .js-hide {
+  display: none;
+}
+.show, html.no-js .no-js-show, html.js .js-show  {
+  display: block;
+}
+
+// Visibility
+.invisible {
+  visibility: hidden;
+}

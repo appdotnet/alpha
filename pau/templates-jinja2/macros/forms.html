@@ -1,0 +1,98 @@
+{% macro bootstrap_field(field, label=True, hidden=False, label_subtext=None) %}
+    <div class="field control-group{% if field.field.hidden or hidden%} hide{% endif %} {% if field.errors %}error{% endif %} field-{{field.name|string_to_css_class}}" >
+        {% if label %}
+            <label for='{{field.auto_id}}' class='control-label' {% if field.field.error_label %}data-error-label="{{ field.field.error_label }}"{% endif %}>{{field.label}}</label>
+            {% if label_subtext %}
+            <div class='label-subtext'>{{ label_subtext }}</div>
+            {% endif %}
+        {% endif %}
+        <div class='controls{% if not label %} nolabel{% endif %}'>
+            {{ caller() }}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro field_errors(field) %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            {% if not loop.first %}, {% endif %}<span>{{ error|escape }}</span>
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% macro input_field(field, label=True, hidden=False, label_subtext=None) %}
+    {% call bootstrap_field(field, label, hidden, label_subtext) %}
+        {% if not app_creating and field.field.only_for_create %}
+            <span class="locked-input">{% if field.field.pre_text %}{{field.field.pre_text}}{% endif %}{{field.value()}}</span>
+        {% else %}
+            {{ field|safe }}
+            {% if field.errors %}
+            <span class='help-inline'>
+                {{ field_errors(field) }}
+            </span>
+            {% endif %}
+        {% endif %}
+        {% if field.help_text %}
+            <p class='help-block'>{{ field.help_text|safe }}</p>
+        {% endif %}
+    {% endcall %}
+{% endmacro %}
+
+{% macro locked_input_field(field, label=True, hidden=False, label_subtext=None) %}
+    {% call bootstrap_field(field, label, hidden, label_subtext) %}
+        <span class="locked-input">{% if field.field.pre_text %}{{field.field.pre_text}}{% endif %}{{field.value()}}</span>
+        {% if field.help_text %}
+            <p class='help-block'>{{ field.help_text|safe }}</p>
+        {% endif %}
+    {% endcall %}
+{% endmacro %}
+
+{% macro checkbox_container(field, wrap_with_label, label_classes='control-label') %}
+    <div class='checkbox-container'>
+    {% if not wrap_with_label %}
+        {{ field|safe }} <span class='checkbox-label'>{{field.label}}</span>
+    {% else %}
+        <label for='{{field.auto_id}}' onclick="" class='{{ label_classes }}'>{{ field|safe }} <span class='checkbox-label'>{{field.label}}</span></label>
+    {% endif %}
+    </div>
+    {{ field_errors(field) }}
+{% endmacro %}
+
+{% macro checkbox_field(field, wrap_with_label=False) %}
+    <div class="field control-group{% if field.field.hidden %} hide{% endif %} {% if field.errors %}error{% endif %} field-{{field.name}}" >
+        <div class='controls'>
+            {{ checkbox_container(field, wrap_with_label) }}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro fieldset(form_key, form) %}
+    <fieldset class="{% if form_key %}field-set fieldset-key-{{form_key}}{% endif %} {% if not form.settings.get('show', True) %}hide{% endif %}">
+        {% for field in form.hidden_fields() %}
+            {{ field|safe }}
+        {% endfor %}
+        {{ caller() }}
+    </fieldset>
+{% endmacro %}
+
+{% macro auto_submit_page(action='', in_progress_text='', before_button_text='', button_text='here', after_button_text='') %}
+<div class='yui3-u-1 ta-center'>
+    <div class='yui3-u-1-3 t-yui3-u-1-2 m-yui3-u-1'>
+        <h1 class="heading-with-hr"><span>{{ in_progress_text }}</span><hr></h1>
+        <form class="form-vertical form-flexible" action="" method="POST" id="auto-submit-form">
+            <fieldset>
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+                <input type="hidden" name="action" value="{{ action }}" />
+                <div class="control-group ta-center">
+                    <div class="controls">
+                        <small class='note-style dark'>{{ before_button_text }}<button class="link-color btn-as-link no-padding italic" type="submit">{{ button_text }}</button>{{ after_button_text }}</small>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <script type="text/javascript">
+            document.getElementById('auto-submit-form').submit();
+        </script>
+    </div>
+</div>
+{% endmacro %}

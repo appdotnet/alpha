@@ -1,0 +1,88 @@
+.file-preview {
+    margin-top: 5px;
+    margin-right: 10px;
+
+    div.progress {
+        margin-top: 8px;
+        margin-bottom: 0;
+        width: 250px;
+        position: relative;
+        line-height: 15px;
+        text-align: right;
+        background-color: $themeSolid;
+        background-image: none;
+        border: 1px solid $grayLighter;
+        @include border-radius(18px);
+        @include box-shadow(inset 0 1px 0 rgba(0, 0, 0, .05));
+
+        html.breakpoint-phone & {
+            width: 160px;
+        }
+
+        .bar {
+            position: absolute;
+            width: 100%;
+            height: 18px;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background-image: none;
+            background-color: $themeAttention;
+            @include border-radius(18px);
+            @include box-shadow(inset 0 1px 0 rgba(0, 0, 0, .05));
+        }
+
+        .image-name {
+            margin-right: 8px;
+            position: relative;
+            z-index: 1;
+            font-size: 11px;
+            color: $white;
+            font-family: $sansFontFamily;
+            text-shadow: 0 1px 0 rgba(0, 0, 0, .05);
+
+            .image-name-text {
+                display: inline-block;
+                max-width: 200px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                vertical-align: bottom;
+
+                html.breakpoint-phone & {
+                    max-width: 110px;
+                }
+            }
+        }
+    }
+
+    .plain .progress {
+        border-color: transparent;
+        background-color: transparent;
+        background-image: none;
+        @include border-radius(18px);
+        @include box-shadow(none);
+
+        .image-name {
+
+            .icon-remove-sign {
+                cursor: pointer;
+                position: relative;
+                top: 1px;
+                font-size: 14px;
+                margin-right: 4px;
+                color: lighten($themeSubText, 15%);
+
+                &:hover {
+                    color: darken($themeSubText, 10%);
+                }
+            }
+
+            .text-success {
+                color: $themeAccent;
+                font-weight: normal;
+                text-shadow: none;
+            }
+        }
+    }
+}

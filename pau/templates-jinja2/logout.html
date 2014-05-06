@@ -1,0 +1,12 @@
+{% extends 'pau/base.html' %}
+{% import "pau/macros/forms.html" as forms_macros with context %}
+{% block main %}
+    {{ forms_macros.auto_submit_page(
+            action='logout',
+            in_progress_text='Logging out ...',
+            before_button_text='Still here? Click ',
+            button_text='here',
+            after_button_text=' to complete the logout process.'
+        )
+    }}
+{% endblock %}

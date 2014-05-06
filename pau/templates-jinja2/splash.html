@@ -1,0 +1,73 @@
+{% extends 'pau/base.html' %}
+
+{% block nav %}{% endblock %}
+{% block hero_block %}
+<div class="wide-container top-block blue backer-top-block alpha-top-block">
+    <div class="container">
+        <div class="main-content-block ta-center">
+            <div class="alpha-index-logo"></div>
+            <h1 class="heading-with-hr"><span>Alpha</span><hr></h1>
+            <p class="note-style">Microblogging for App.net</p>
+            <div class="simple-sign-up-block">
+                <a href='{{ url_for('login') }}' class='btn btn-primary broadcast-index-button'>Log In</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wide-container white backer-content index-body-block backer-body-block alpha-body-block">
+    <div class="container">
+        <div class="main-content-block">
+            <div class="full-width-title note-style dark ta-center"><span>What is Alpha?</span><hr></div>
+            <p>Alpha is an ad-free social network. It’s your real-time feed, a home for meaningful conversation, where you control your data.</p>
+            <div class="broadcast-index-device-cluster"></div>
+            <div class="yui3-g">
+                <div class="index-body-block-step-wrapper ta-center">
+                    <div class="yui3-u-1-2 m-yui3-u-1">
+                        <div class="alpha-index-image chat"></div>
+                    </div>
+                    <div class="yui3-u-1-2 m-yui3-u-1">
+                        <div class="index-body-block-step-inner no-padding">
+                            <h3 class="heading-with-hr"><span>Join the conversation</span><hr></h3>
+                            <p>Alpha has been designed with communication at its core. Easily join a conversation or start your own and see why the App.net community is so special.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="index-body-block-step-wrapper ta-center">
+                    <div class="yui3-u-1-2 m-yui3-u-1">
+                        <div class="index-body-block-step-inner">
+                            <div class="alpha-index-image topics yui3-u-none m-yui3-u-1"></div>
+                            <h3 class="heading-with-hr"><span>Stay Informed</span><hr></h3>
+                            <p>With a vibrant community of individuals and organizations, Alpha is your place to stay informed. Whether you’re looking for humor or news, to find friends or make new ones, Alpha has something for you.</p>
+                        </div>
+                    </div>
+                    <div class="yui3-u-1-2 m-yui3-u-1">
+                        <div class="alpha-index-image topics m-yui3-u-none"></div>
+                    </div>
+                </div>
+                <div class="index-body-block-step-wrapper ta-center">
+                    <div class="yui3-u-1-2 m-yui3-u-1">
+                        <div class="alpha-index-image photos"></div>
+                    </div>
+                    <div class="yui3-u-1-2 m-yui3-u-1">
+                        <div class="index-body-block-step-inner">
+                            <h3 class="heading-with-hr"><span>Beautiful Photos</span><hr></h3>
+                            <p>Sometimes you need a picture to tell the entire story. Your photos will be displayed in your stream and on a photo display page.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wide-container gray backer-content backer-body-block broadcast-body-block">
+    <div class="container">
+        <div class="main-content-block ta-center">
+            <h1>Want access to Alpha?</h1>
+            <a href='{{ url_for('login') }}' class='btn btn-primary broadcast-index-button'>Log In with App.net</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+{% endblock %}

@@ -1,0 +1,227 @@
+
+// Overriding the default mixin
+@mixin boldButtonBackground($PrimaryBackground) {
+    background-color: $PrimaryBackground;
+
+    &:hover {
+        background-color: lighten($PrimaryBackground, 3%);
+    }
+}
+
+@mixin buttons($btn_namespace:'', $btnRadius:$btnRadiusDefault) {
+    // BUTTON STYLES
+    // -------------
+
+
+    // Base styles
+    // --------------------------------------------------
+
+    // Core
+    .#{$btn_namespace}btn {
+        display: inline-block;
+        @include ie7-inline-block();
+        padding: 15px 32px 15px 32px;
+        background-color: $btnBackground;
+        border: 0;
+        font-family: $headingsFontFamily;
+        color: lighten($themeAccent, 10%);
+        font-size: 14px;
+        text-transform: uppercase;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+        cursor: pointer;
+        vertical-align: middle;
+        text-align: center;
+        @include border-radius($btnRadiusDefault);
+        @include box-shadow(0 2px 0 rgba(0, 0, 0, .05));
+    }
+
+    // Hover state
+    .#{$btn_namespace}btn:hover {
+        background-color: lighten($btnBackground, 3%);
+        color: lighten($themeAccent, 10%);
+        border-bottom: 0;
+    }
+
+    .#{$btn_namespace}btn-gray:hover {
+        color: $textColor;
+    }
+
+    // Focus state for keyboard and accessibility
+    .#{$btn_namespace}btn:focus {
+        @include tab-focus();
+    }
+
+    // Disabled state
+    .#{$btn_namespace}btn.disabled,
+    .#{$btn_namespace}btn[disabled] {
+        cursor: default;
+        background-image: none;
+        color: darken($themeSubText, 20%);
+        background-color: $btnBackground;
+        @include opacity(65);
+        @include box-shadow(none);
+    }
+
+    .#{$btn_namespace}btn.disabled:hover,
+    .#{$btn_namespace}btn[disabled]:hover {
+        color: darken($themeSubText, 20%);
+        background-color: $btnBackground;
+    }
+
+    // Button Sizes
+    // --------------------------------------------------
+
+    // Large
+    .#{$btn_namespace}btn-large {
+        padding: 9px 14px;
+        font-size: $baseFontSize + 2px;
+        line-height: normal;
+    }
+
+    .#{$btn_namespace}btn-large [class^="icon-"] {
+        margin-top: 1px;
+    }
+
+    // Small
+    .#{$btn_namespace}btn-small {
+        padding: 7px 15px 7px 15px;
+        font-size: $baseFontSize - 4px;
+        line-height: $baseLineHeight;
+    }
+
+    .#{$btn_namespace}btn-small [class^="icon-"] {
+        margin-top: -1px;
+    }
+
+    // Mini
+    .#{$btn_namespace}btn-mini {
+        padding: 2px 6px;
+        font-size: $baseFontSize - 2px;
+        line-height: $baseLineHeight - 4px;
+    }
+
+    // Alternate buttons
+    // --------------------------------------------------
+
+    // Provide *some* extra contrast for those who can get it
+    .#{$btn_namespace}btn-primary.active,
+    .#{$btn_namespace}btn-warning.active,
+    .#{$btn_namespace}btn-danger.active,
+    .#{$btn_namespace}btn-success.active,
+    .#{$btn_namespace}btn-info.active,
+    .#{$btn_namespace}btn-blue.active,
+    .#{$btn_namespace}btn-inverse.active,
+    .#{$btn_namespace}btn-empty.active {
+        color: rgba(255, 255, 255, .75);
+    }
+
+    .#{$btn_namespace}btn-primary,
+    .#{$btn_namespace}btn-warning,
+    .#{$btn_namespace}btn-danger,
+    .#{$btn_namespace}btn-success,
+    .#{$btn_namespace}btn-info,
+    .#{$btn_namespace}btn-blue {
+        color: $white;
+
+        &:hover {
+            color: $white;
+        }
+    }
+
+    // Set the backgrounds
+    // -------------------------
+    .#{$btn_namespace}btn-primary {
+        @include boldButtonBackground($btnPrimaryBackground);
+    }
+
+    // Warning appears are orange
+    .#{$btn_namespace}btn-warning {
+        @include boldButtonBackground($btnWarningBackground);
+    }
+
+    // Danger and error appear as red
+    .#{$btn_namespace}btn-danger {
+        @include boldButtonBackground($btnDangerBackground);
+    }
+
+    // Success appears as green
+    .#{$btn_namespace}btn-success {
+        @include boldButtonBackground($btnSuccessBackground);
+    }
+
+    // Info appears as a neutral blue
+    .#{$btn_namespace}btn-info {
+        @include boldButtonBackground($btnInfoBackground);
+    }
+
+    // Blue appears as a strong blue
+    .#{$btn_namespace}btn-blue {
+        @include boldButtonBackground($btnBlueBackground);
+    }
+
+    // Blue appears as a gray button
+    .#{$btn_namespace}btn-gray {
+        color: $textColor;
+        text-shadow: none;
+        @include boldButtonBackground($grayLighter);
+    }
+
+    // Inverse appears as dark gray
+    .#{$btn_namespace}btn-inverse {
+        @include boldButtonBackground($btnInverseBackground);
+    }
+
+    // Empty appears as text
+    .#{$btn_namespace}btn-empty,
+    .#{$btn_namespace}btn-empty:hover {
+        background: none;
+        border: 0;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    // As link
+    .#{$btn_namespace}btn-as-link {
+        @include boldButtonBackground(rgba(0, 0, 0, 0));
+        border: 0;
+    }
+
+
+    // Cross-browser Jank
+    // --------------------------------------------------
+
+    button.#{$btn_namespace}btn,
+    input[type="submit"].#{$btn_namespace}btn {
+        -webkit-font-smoothing: antialiased;
+        // IE7 has some default padding on button controls
+        *padding-top: 2px;
+        *padding-bottom: 2px;
+
+        // Firefox 3.6 only I believe
+        &::-moz-focus-inner {
+            padding: 0;
+            border: 0;
+        }
+
+
+
+        &.#{$btn_namespace}btn-large {
+            *padding-top: 7px;
+            *padding-bottom: 7px;
+        }
+
+        &.#{$btn_namespace}btn-small {
+            *padding-top: 3px;
+            *padding-bottom: 3px;
+        }
+
+        &.#{$btn_namespace}btn-mini {
+            *padding-top: 1px;
+            *padding-bottom: 1px;
+        }
+    }
+}
+
+
+@include buttons('');

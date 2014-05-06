@@ -1,0 +1,17 @@
+{% extends 'pau/pjax_switch.html' %}
+{% block nav_list %}{% endblock %}
+{% block main %}
+<div class='container yui3-g'>
+    <div class='ta-center'>
+        <div class='yui3-u-1-2 t-yui3-u-3-4 m-yui3-u-11-12'>
+            {% if not following %}
+            <h3 class='ta-left'>Follow {{user.username}} on App.net</h3>
+            {{ user_follow_presenter|render_presenters }}
+            {% else %}
+            <h3>You are already following {{user.username}}</h3>
+            <p><a href='/' onclick='window.close();'>Close Window</a></p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

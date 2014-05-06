@@ -1,0 +1,84 @@
+$lightestGray: #eff0f6; // sidebar and pagination background-color
+$lightGray: #e3e4ea; // wrapper background-color
+$darkerGray: #d1d2d9; // sidebar and pagination border-color
+$darkestGray: #cacbd1; // block border-colors, wrapper border-color
+$purple: #6274a5; // link color
+$purpleBlue: #777a99; // download button
+$purpleGray: #8f93a3; // light feed, sidebar titles & unstyled download button bg
+$lightestBlue: #3e4968; // Used as a highlight on dark backgrounds
+$lightBlue: #343b50;
+$darkBlue: #282f43; // a lighter blue than $darkestBlue
+$darkestBlue: #101420; // used in header and other places where a deep blue is necessary
+
+@mixin box_shadow($color, $hoff, $voff, $blur, $spread) {
+    -moz-box-shadow: $color $hoff $voff $blur $spread;
+    -webkit-box-shadow: $color $hoff $voff $blur $spread;
+    -o-box-shadow: $color $hoff $voff $blur $spread;
+    box-shadow: $color $hoff $voff $blur $spread;
+}
+
+@mixin box_shadow_inset($inset_color, $inset_hoff, $inset_voff, $inset_blur, $color, $hoff, $voff, $blur) {
+    -moz-box-shadow: $inset_hoff $inset_voff $inset_blur $inset_color inset, $hoff $voff $blur $color;
+    -webkit-box-shadow: $inset_hoff $inset_voff $inset_blur $inset_color inset, $hoff $voff $blur $color;
+    -o-box-shadow: $inset_hoff $inset_voff $inset_blur $inset_color inset, $hoff $voff $blur $color;
+    box-shadow: $inset_hoff $inset_voff $inset_blur $inset_color inset, $hoff $voff $blur $color;
+}
+
+@mixin background_size($x, $y) {
+    -webkit-background-size: $x, $y;
+    -mox-background-size: $x, $y;
+    -o-background-size: $x, $y;
+    background-size: $x, $y;
+}
+
+@mixin border_radius($vertical, $horizontal:'') {
+    -webkit-border-radius: $vertical;
+    -moz-border-radius: $vertical;
+    -o-border-radius: $vertical;
+    -ms-border-radius: $vertical;
+    -khtml-border-radius: $vertical;
+    border-radius: $vertical;
+}
+
+@mixin linear_gradient($color1, $color2, $stop) {
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0%, $color1), color-stop($stop, $color2));
+    background-image: -moz-linear-gradient(top, $color1 0%, $color2 $stop);
+    background-image: linear-gradient(top, $color1 0%, $color2 $stop);
+}
+
+@mixin clearfix() {
+    *zoom: 1;
+
+    &:before,
+    &:after {
+        display: table;
+        content: '';
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin readable_textareas() {
+    border: 1px solid #d2d2d2;
+    padding: 4px 5px;
+    font-size: 13px;
+    line-height: 19px;
+    @include box_shadow_inset(rgba(0, 0, 0, .1), 0, 1px, 1px, transparent, 0, 0, 0);
+    @include linear_gradient(#fdfdfd, #fff, 1px);
+    @include border_radius(3px, 3px);
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+@mixin transition($property: opacity, $durration: .3s, $animation: ease-in-out) {
+
+    -webkit-transition: $property $durration $animation;
+    -moz-transition: $property $durration $animation;
+    -ms-transition: $property $durration $animation;
+    -o-transition: $property $durration $animation;
+    transition: $property $durration $animation;
+}

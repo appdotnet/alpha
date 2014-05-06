@@ -1,0 +1,69 @@
+{% extends 'pau/two_column_base.html' %}
+{% import "pau/common/macros.html" as pau_macros with context %}
+
+{# This stuff won't be around in pjax but thats okay because crawlers don't use pjax #}
+{% block extra_header %}
+<meta property="og:title" content="{{ page_title }}" />
+<meta property="og:site_name" content="App.net" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="{{ page_description }}" />
+<meta property="og:url" content="{{ request.build_absolute_uri() }}">
+<link rel="alternate" type="application/json+oembed" href="{{ oembed_url }}" title="App.net oEmbed" />
+{% endblock %}
+
+{% macro posts_in_thread(post_presenters) %}
+{% if post_presenters %}
+<div class='well-elevated'>
+    <div class='stream-container'>
+        <div class="post-stream">
+            {{post_presenters|render_presenters}}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% block main_column %}
+<div class='yui3-g post-detail-view'>
+    <div class='yui3-u-1'>
+        {{ posts_in_thread(before_post_presenters) }}
+        <div class='well-elevated single-post ta-left'>
+            {{ main_post_inner|render_presenters }}
+            {% if owner %}
+            <div class="post-stats">
+                <div class="post-stats-container">
+                    <div class="content">
+                        <div class="replies transition-color">
+                            <strong>{{num_replies}}</strong>
+                            <p>{% trans num=num_replies %}reply{% pluralize %}replies{% endtrans %}</p>
+                        </div>
+                        <div class="reposts transition-color">
+                            <a href="{{ url_for('reposters', kwargs={'username': post_a.user.username, 'post_id': post_a.id}) }}">
+                                <strong>{{num_reposts}}</strong>
+                                <p>{% trans num=num_reposts %}repost{% pluralize %}reposts{% endtrans %}</p>
+                            </a>
+                        </div>
+                        <div class="stars transition-color">
+                            <a href="{{ url_for('starred_by', kwargs={'username': post_a.user.username, 'post_id': post_a.id}) }}">
+                                <strong>{{num_stars}}</strong>
+                                <p>{% trans num=num_stars %}star{% pluralize %}stars{% endtrans %}</p>
+                            </a>
+                        </div>
+                        <div class='facepile yui3-u'>
+                            {{ star_facepile_presenter|render_presenters}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {{ pau_macros.reportpost() }}
+        {{ posts_in_thread(after_post_presenters) }}
+        {% if not is_repost %}
+        <div class="single-post">
+            {{ post_box_presenter|render_presenters }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

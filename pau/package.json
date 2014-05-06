@@ -1,0 +1,13 @@
+{
+  "name": "pau-static-asset-build",
+  "preferGlobal": false,
+  "version": "0.0.1",
+  "devDependencies": {
+    "gulp": "~3.6.2",
+    "gulp-rev": "~0.3.2",
+    "gulp-ruby-sass": "~0.4.3",
+    "gulp-sass": "~0.7.1",
+    "gulp-uglify": "~0.2.1",
+    "gulp-concat": "~2.2.0"
+  }
+}

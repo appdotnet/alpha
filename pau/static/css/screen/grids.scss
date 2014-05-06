@@ -1,0 +1,265 @@
+@import 'mixin/yui_grid.scss';
+
+@include yui_grid();
+
+// Alignment Helpers
+
+// If you want to middle alight a group of yui-u's
+
+.va-middle {
+    vertical-align: middle;
+}
+
+.va-top {
+    vertical-align: top;
+}
+
+.va-bottom {
+    vertical-align: bottom;
+}
+
+.ta-left {
+    text-align: left;
+}
+
+.ta-right {
+    text-align: right;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.yui3-u.table-cell {
+    display: table-cell;
+    word-wrap: break-line;
+    word-break: break-word;
+}
+
+.break-line {
+    word-wrap: break-line;
+    word-break: break-word;
+}
+
+.ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// These are superseded in media querires
+.float-left,
+.fixed-left {
+    float: left;
+}
+
+.float-right,
+.fixed-right {
+    float: right;
+}
+
+.mg-b-10 {
+    margin-bottom: 10px;
+}
+
+.mg-b-20 {
+    margin-bottom: 20px;
+}
+
+.mg-b-30 {
+    margin-bottom: 30px;
+}
+
+.mg-b-40 {
+    margin-bottom: 40px;
+}
+
+.mg-t-10 {
+    margin-top: 10px;
+}
+
+.mg-t-20 {
+    margin-top: 20px;
+}
+
+.mg-t-30 {
+    margin-top: 30px;
+}
+
+.mg-t-40 {
+    margin-top: 40px;
+}
+
+.mg-r-10 {
+    margin-right: 10px;
+}
+
+.mg-r-20 {
+    margin-right: 20px;
+}
+
+.mg-r-30 {
+    margin-right: 30px;
+}
+
+.mg-r-40 {
+    margin-right: 40px;
+}
+
+.mg-l-10 {
+    margin-left: 10px;
+}
+
+$icon_showcase_width: 140px;
+$app_detail_icon_width: 100px;
+$icon_view_width: 77px;
+$auto_complete_icon_width: 60px;
+$button_app_icon_width: 48px;
+
+.fixed-col {
+
+    &.icon-showcase {
+        width: $icon_showcase_width;
+    }
+
+    &.icon-view {
+        width: $icon_view_width;
+    }
+
+    &.app-detail-icon {
+        width: $app_detail_icon_width;
+    }
+
+    &.autocomplete-icon {
+        width: $auto_complete_icon_width;
+    }
+
+    &.button-app-icon {
+        width: $button_app_icon_width;
+    }
+}
+
+.flex-col {
+    float: right;
+    width: 100%;
+
+    &.icon-showcase {
+        margin-left: -$icon_showcase_width;
+    }
+
+    &.icon-view {
+        margin-left: -$icon_view_width;
+    }
+
+    &.app-detail-icon {
+        margin-left: -$app_detail_icon_width;
+    }
+
+    &.autocomplete-icon {
+        margin-left: -$auto_complete_icon_width;
+    }
+
+    &.button-app-icon {
+        margin-left: -$button_app_icon_width;
+    }
+}
+
+.flex-col-inside {
+
+    .icon-showcase & {
+        margin-left: $icon_showcase_width;
+    }
+
+    .icon-view & {
+        margin-left: $icon_view_width;
+    }
+
+    .app-detail-icon & {
+        margin-left: $app_detail_icon_width;
+    }
+
+    .autocomplete-icon & {
+        margin-left: $auto_complete_icon_width;
+    }
+
+    .button-app-icon & {
+        margin-left: $button_app_icon_width;
+    }
+}
+
+$button_col: 106px;
+$recommend_button_col: 100px;
+$button_action_col: 33px;
+
+.fixed-col-right {
+    float: right;
+    position: relative;
+
+    &.button-col {
+        width: $button_col;
+    }
+
+    &.recommend-button-col {
+        width: $recommend_button_col;
+    }
+
+    &.button-action-col {
+        width: $button_action_col;
+    }
+}
+
+.flex-col-left {
+    float: left;
+    width: 100%;
+
+    &.button-col {
+        margin-right: -$button_col;
+    }
+
+    &.recommend-button-col {
+        margin-right: -$recommend_button_col;
+    }
+
+    &.button-action-col {
+        margin-right: -$button_action_col;
+    }
+}
+
+.flex-col-left-inside {
+    width: auto;
+    float: none;
+    position: static;
+
+    .button-col & {
+        margin-right: $button_col;
+    }
+
+    .recommend-button-col & {
+        margin-right: $recommend_button_col;
+    }
+
+    .button-action-col & {
+        margin-right: $button_action_col;
+    }
+}
+
+html.breakpoint-phone {
+    @include yui_grid('m-');
+}
+
+html.breakpoint-tablet {
+    @include yui_grid('t-');
+}
+
+html.breakpoint-tablet,
+html.breakpoint-phone {
+    .float-right,
+    .float-left {
+        float: none;
+    }
+}

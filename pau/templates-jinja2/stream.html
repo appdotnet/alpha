@@ -1,0 +1,38 @@
+{% extends 'pau/two_column_base.html' %}
+{% import "pau/common/macros.html" as pau_macros with context %}
+
+{% block main_column %}
+    {% if show_new_post_box %}
+    {{ post_box_presenter|render_presenters }}
+    {% endif %}
+    {% block extra_items %}
+    {% endblock %}
+    {% if item_presenters %}
+    <div class='well-elevated'>
+        <div class='stream-container'>
+            <div
+                data-stream
+                {% if since_id %}data-since-id="{{since_id}}"{% endif %}
+                {% if before_id %}data-before-id="{{before_id}}"{% endif %}
+                {% if more %}data-more="{{more}}"{% endif %}>
+                {{item_presenters|render_presenters}}
+            </div>
+            <div class='spinner hide ta-center' data-stream-loader>
+                <span class='loading'></span>
+            </div>
+        </div>
+    </div>
+    {% elif empty_message %}
+    <div class="well-elevated empty">
+        {{ empty_message }}
+    </div>
+    {% endif %}
+    {{ pau_macros.reportpost() }}
+    {% if rss_link %}
+    {#
+        because of pjax it's just easier if we put this in the body
+        class='hide' is complete hocus pocus
+    #}
+    <link rel="alternate" type="application/rss+xml" href="{{ rss_link }}" class='hide' />
+    {% endif %}
+{% endblock %}

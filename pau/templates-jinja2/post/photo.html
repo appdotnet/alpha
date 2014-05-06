@@ -1,0 +1,55 @@
+{% extends 'pau/pjax_switch.html' %}
+{% import "pau/common/macros.html" as pau_macros with context %}
+
+{% block nav %}
+{% endblock %}
+
+{# This stuff won't be around in pjax but thats okay because crawlers don't use pjax #}
+{% block extra_header %}
+<meta property="og:title" content="{{ page_title }}" />
+<meta property="og:site_name" content="App.net" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="{{ page_description }}" />
+<meta property="og:image" content="{{image_url}}" />
+<meta property="og:url" content="{{ request.build_absolute_uri() }}">
+<link rel="alternate" type="application/json+oembed" href="{{ oembed_url }}" title="App.net oEmbed" />
+{% endblock %}
+
+{% block main %}
+<div class='photo-view'>
+    <div class='top'>
+        <div class="branding-container">
+            <a class="branding pull-left" href="{{ url_for('home') }}"></a>
+            <a class="see-conversation pull-right m-yui3-u-none" href='{{post_url}}'>See conversation &rarr;</a>
+            <a class="see-conversation pull-right m-yui3-u t-yui3-u-none yui3-u-none" href='{{post_url}}'>Conversation</a>
+            {% if not request.user.is_authenticated() %}
+                <a class="signup pull-right"
+                    href="https://app.net">Sign Up
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class='middle'>
+        <div class='image-container'>
+            <div class='loader'><i class='icon-refresh icon-2x icon-spin'></i></div>
+            <img src='{{image_url}}' data-full-width='{{image_width}}' data-full-height='{{image_height}}'>
+        </div>
+        {% if prev_photo_url %}
+            <a class='left-arrow' href='{{prev_photo_url}}'></a>
+        {% endif %}
+        {% if next_photo_url %}
+            <a class='right-arrow' href='{{next_photo_url}}'></a>
+        {% endif %}
+    </div>
+    <div class='bottom' data-post-container>
+        {{post_presenter|render_presenters}}
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% if is_pjax %}
+{{ pau_macros.page_context_meta_tag() }}
+<title class='hide'>{{ page_title }}</title>
+{% endif %}
+{% endblock %}
