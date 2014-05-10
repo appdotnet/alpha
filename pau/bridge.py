@@ -202,7 +202,7 @@ class AlphaAPI(object):
         self.enabled_migrations = '&'.join('%s=1' % m for m in self.migrations)
         self.access_token = None
 
-    def call_api(self, request, path, params=None, data=None, method='GET', post_type='json', headers=None):
+    def call_api(self, request, path, params=None, data=None, method='GET', post_type='json', headers=None, files=None):
         headers = headers or {}
         api_params = {
             'include_annotations': '1',
@@ -218,12 +218,10 @@ class AlphaAPI(object):
             if post_type == 'json':
                 # adnpy will json.dumps in this case
                 api_method = request.omo_api.request_json
-            else:
-                data = json.dumps(data)
 
         # TODO remove all the alpha specific exceptions and just use the adnpy ones
         try:
-            response = api_method(method, path, params=api_params, data=data, headers=headers)
+            response = api_method(method, path, params=api_params, data=data, headers=headers, files=files)
         except adnpy.errors.AdnBadRequestAPIException, e:
             # 400
             raise AlphaBadRequestAPIException(e.response)
